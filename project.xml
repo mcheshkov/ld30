@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<!-- NMML reference: https://gist.github.com/1763850 -->
+	
+	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
+	<meta title="LD30" package="" version="0.1.0-SNAPSHOT" company="Martial Canterel" />
+	
+	<!--<app preloader="com.sevenlevel.Preloader" />-->
+	
+	<!-- output -->
+	<app main="Main" file="ld30" path="bin"/>
+
+    <window background="#000000" fps="60" />
+    <window width="1600" height="1000" unless="mobile" />
+    <window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
+
+    <!-- classpath, haxe libs -->
+    <source path="src" />
+    <haxelib name="openfl" version="1.4.0"/>
+    <haxelib name="nape" version="2.0.16"/>
+    <haxelib name="actuate" version="1.7.2"/>
+
+    <!-- assets -->
+    <!--<icon path="assets/openfl.svg" />-->
+    <assets path="assets/gfx" include="*.png" type="image" rename="gfx"/>
+    <assets path="assets/gfx/raskadrovka" include="*.jpg" type="image" rename="raskadrovka"/>
+    <assets path="assets/fonts" include="*.ttf" type="font" rename="fonts"/>
+
+
+    <!--this will reqiure to regenerate .hxml files-->
+	<haxeflag name="--no-traces" if="release"/>
+	
+	<!--<haxeflag name="-D dump=pretty"/>-->
+	
+	<!-- optimize output -->
+	<!--<haxeflag name="-dce full" if="release"/>-->
+</project>
