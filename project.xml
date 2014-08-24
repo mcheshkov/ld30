@@ -29,8 +29,11 @@
 
     <!--this will reqiure to regenerate .hxml files-->
 	<haxeflag name="--no-traces" if="release"/>
-	
-	<!--<haxeflag name="-D dump=pretty"/>-->
+
+    <template path="templates" />
+    <assets path="templates/web" include="*" type="template" rename=""/>
+
+    <!--<haxeflag name="-D dump=pretty"/>-->
 	
 	<!-- optimize output -->
 	<!--<haxeflag name="-dce full" if="release"/>-->
