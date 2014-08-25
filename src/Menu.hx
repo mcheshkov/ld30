@@ -1,5 +1,7 @@
 package ;
 
+import flash.media.Sound;
+import flash.media.SoundChannel;
 import openfl.Assets;
 import flash.display.Bitmap;
 import flash.events.KeyboardEvent;
@@ -26,13 +28,15 @@ class Menu extends Sprite{
 
 	var time:Float = 0;
 	var currentTime:Float = 0;
-	var prevTime:Float = 0;
-	static inline var FRAME_TIME:Float = 300;
+	public var prevTime:Float = 0;
+	public var nextFrameTime:Float = 300;
 
 	var bg:Sprite;
 
 	public function new() {
 		super();
+
+		INSTANCE = this;
 
 		prevTime = flash.Lib.getTimer();
 		currentTime = flash.Lib.getTimer();
@@ -64,10 +68,17 @@ class Menu extends Sprite{
 		bg.y = (1000 - bg.height) / 2;
 		addChild(_tf);
 
+		bgmSound = Assets.getMusic("music/microcosmos444.mp3");
+		bgmSoundChannel = bgmSound.play();
+		bgmSoundChannel.addEventListener( Event.SOUND_COMPLETE, onBackgroundMusicFinished );
+
 		addListeners();
 	}
 
-	function addListeners(){
+	var bgmSound:Sound;
+	var bgmSoundChannel:SoundChannel;
+
+	public function addListeners(){
 		Lib.current.stage.addEventListener(KeyboardEvent.KEY_DOWN,onKeyDown);
 		Lib.current.stage.addEventListener(Event.ENTER_FRAME,onEnterFrame);
 	}
@@ -84,10 +95,13 @@ class Menu extends Sprite{
 		currentTime = flash.Lib.getTimer();
 		var diff = currentTime - prevTime;
 		time += diff;
-		if (time >= FRAME_TIME){
+		if (time >= nextFrameTime){
 			frame++;
 			frame %= frames.length;
-			time -= FRAME_TIME;
+			time -= nextFrameTime;
+
+			var lambda = .01;
+			nextFrameTime = 60 + -1.0 / lambda * Math.log(Math.random());
 		}
 
 		bg.addChild(frames[frame]);
@@ -101,5 +115,14 @@ class Menu extends Sprite{
 			Lib.current.stage.removeChild(this);
 			Lib.current.stage.addChild(new Game());
 		}
+	}
+
+	public static var INSTANCE:Menu;
+
+	public function onBackgroundMusicFinished( event:Event ):Void
+	{
+		bgmSoundChannel.removeEventListener( Event.SOUND_COMPLETE, onBackgroundMusicFinished );
+		bgmSoundChannel = bgmSound.play();
+		bgmSoundChannel.addEventListener( Event.SOUND_COMPLETE, onBackgroundMusicFinished );
 	}
 }

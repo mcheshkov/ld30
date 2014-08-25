@@ -7,13 +7,21 @@
 		
 		<script type="text/javascript" src="swfobject.js"></script>
 		<script type="text/javascript">
-			
-			swfobject.embedSWF ("::APP_FILE::.swf", "nme-application", "::if (WIN_WIDTH == 0)::800::else::::WIN_WIDTH::::end::", "::if (WIN_HEIGHT == 0)::500::else::::WIN_HEIGHT::::end::", "::SWF_VERSION::", "expressInstall.swf", ::WIN_PARAMETERS::);
+            var params = {
+                menu: "false",
+                scale: "noScale",
+                allowFullscreen: "true",
+                allowScriptAccess: "always",
+                bgcolor: "",
+                wmode: "opaque"
+            };
+
+			swfobject.embedSWF ("::APP_FILE::.swf", "nme-application", "::if (WIN_WIDTH == 0)::800::else::::WIN_WIDTH::::end::", "::if (WIN_HEIGHT == 0)::500::else::::WIN_HEIGHT::::end::", "::SWF_VERSION::", "expressInstall.swf", ::WIN_PARAMETERS::, params);
 		</script>
 		
 		<style>
-			html, body, #nme-application	{ width:::if (WIN_WIDTH == 0)::100%::else::::WIN_WIDTH::px::end::; height:::if (WIN_HEIGHT == 0)::100%::else::::WIN_HEIGHT::px::end::; }
-			body					{ margin:0; padding:0; overflow:hidden; }
+			#nme-application	{ margin-left: 160px; margin-top: 40px; width:::if (WIN_WIDTH == 0)::100%::else::::WIN_WIDTH::px::end::; height:::if (WIN_HEIGHT == 0)::100%::else::::WIN_HEIGHT::px::end::; }
+			body					{ margin:0; padding:0; overflow:hidden; background-color: black;}
 			
 		</style>
 		

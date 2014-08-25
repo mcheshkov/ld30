@@ -2,6 +2,8 @@ package ;
 
 class Util {
 	public static inline function rad2deg(r:Float):Float {
-		return r * 180.0 / Math.PI;
+		var a =	(r * 180.0 / Math.PI);
+
+		return (360) * ((a / (360)) - Math.floor(a / (360)));
 	}
 }

@@ -25,6 +25,7 @@
     <assets path="assets/gfx" include="*.png" type="image" rename="gfx"/>
     <assets path="assets/gfx/raskadrovka" include="*.jpg" type="image" rename="raskadrovka"/>
     <assets path="assets/fonts" include="*.ttf" type="font" rename="fonts"/>
+    <assets path="assets/music" include="*.mp3" type="music" rename="music"/>
 
 
     <!--this will reqiure to regenerate .hxml files-->
